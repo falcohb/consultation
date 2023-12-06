@@ -1,0 +1,64 @@
+$callout-bg-scale: -95% !default;
+$callout-border-scale: -40% !default;
+$callout-color-scale: 40% !default;
+
+.callout {
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  border-left-style: solid;
+  border-left-width: 0.3rem;
+}
+
+.callout h5 {
+  margin-top: 0;
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+.callout code,
+.callout .highlight {
+  background-color: $gray-100;
+}
+
+@each $state, $value in $theme-colors {
+  $callout-background: shift-color($value, $callout-bg-scale);
+  $callout-border: shift-color($value, $callout-border-scale);
+  $callout-color: shift-color($value, $callout-color-scale);
+  .callout-#{$state} {
+    border-left-color: $callout-border;
+    background-color: $callout-background;
+
+    h5 {
+      color: $callout-color;
+    }
+  }
+}
+
+.callout-sm {
+  padding: 0.8rem;
+  margin-top: 0.6rem;
+}
+
+@include color-mode(dark) {
+  @each $state, $value in $theme-colors {
+    $callout-background: shade-color($value, 80%);
+    $callout-border: shade-color($value, 30%);
+    $callout-color: shade-color($value, 20%);
+    .callout-#{$state} {
+      border-left-color: $callout-border;
+      background-color: $callout-background;
+
+      h5 {
+        color: $callout-color;
+      }
+
+      code,
+      .highlight{
+        @extend .bg-body-tertiary;
+      }
+
+    }
+  }
+}

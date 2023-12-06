@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer son compte{% endblock %}
+
+{% block body %}
+    <div class="main-header">
+        <h1 class="display-6 fw-bold text-body-emphasis">Supprimer son compte</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="callout callout-danger">
+                <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous avez le droit à
+                    l'effacement de vos données personnelles. Ce droit signifie que nous
+                    supprimerons toutes les informations vous concernant stockées sur notre plateforme, sauf si des
+                    motifs légitimes existent pour conserver ces données.
+                    La suppression de votre compte entraînera également la perte de toutes vos informations, <strong>y compris
+                    les résultats de vos bilans</strong>.</p>
+            </div>
+
+            <div class="mt-3">
+                <a href="{{ path('app_account_delete') }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Je supprime mon compte</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1 class="display-6 fw-bold text-body-emphasis">Créer un compte</h1>
+
+    <div class="row">
+        <div class="col-md-8 mb-5">
+
+            {{ form_start(registrationForm) }}
+
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(registrationForm.firstName) }}
+                    {{ form_row(registrationForm.lastName) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.origin) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form_row(registrationForm.birthdate) }}
+                    {{ form_row(registrationForm.phone) }}
+                    {{ form_row(registrationForm.postal) }}
+                    {{ form_row(registrationForm.locality) }}
+                    {{ form_row(registrationForm.doctor) }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-purple">S'enregistrer</button>
+            <a href="{{ path('app_home') }}" class="btn btn-secondary">Annuler</a>
+
+            {{ form_end(registrationForm) }}
+        </div>
+
+        <div class="col-md-4">
+            <div class="tag-box tag-box-purple-v2">
+                <p class="mb-2">J'accorde une grande importance à la protection de vos données c'est pourquoi elles ne seront <strong>jamais transmises à des tiers</strong>.</p>
+                <p class="mb-2">Nous avons pris des mesures techniques et organisationnelles de sécurité pour protéger vos informations personnelles contre les pertes, la destruction, la manipulation et l’accès non autorisé.</p>
+                <p class="mb-2">Ce site n'utilise pas de cookies qui conserveraient vos données personnelles.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

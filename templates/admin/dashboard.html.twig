@@ -1,0 +1,39 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}{{ 'admin.dashboard.title'|trans }}{% endblock %}
+
+{% block content_title %}{{ 'admin.dashboard.title'|trans }}{% endblock %}
+
+{% block main %}
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+        {% for dashboardItem in dashboardItems %}
+            {% if is_granted(dashboardItem.access|default('ROLE_ADMIN')) %}
+                <div class="col">
+                    <div class="card border-{{ dashboardItem.color|default('light') }} bg-transparent">
+                        <div class="card-body">
+                            <div class="card-title d-flex justify-content-between">
+                                <h5 class="display-5">{{ dashboardItem.items|default(0) }}</h5>
+                                <i class="{{ dashboardItem.icon }} fa-4x"></i>
+                            </div>
+                            <div style="height: 2rem;">
+                                <p>
+                                    {{ dashboardItem.label|trans }}
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="card-footer bg-{{ dashboardItem.color }}">
+                            <div class="card-text" style="min-height: 1.4rem">
+                                {% if  dashboardItem.link is defined %}
+                                    <a href="{{ dashboardItem.link }}" class="link-{{ dashboardItem.linkColor|default('light') }}">
+                                        Voir <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

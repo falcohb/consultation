@@ -1,0 +1,41 @@
+{# User Menu #}
+{% set login = '#' %}
+{% set logout = '#' %}
+{% if loginRoute is not empty %}
+    {% set login = path(loginRoute) %}
+{% endif %}
+{% if logoutRoute is not empty %}
+    {% set logout = path(logoutRoute) %}
+{% endif %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> {{ app.user.displayName }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+            {% if is_granted('ROLE_ADMIN') %}
+                {% if actions is not empty %}
+                    {% for action in actions %}
+                        <li><a class="dropdown-item" href="{{ action.url }}"><i class="fas fa-{{ action.icon }}"></i> {{ action.label }}</a></li>
+                    {% endfor %}
+                    <li><hr class="dropdown-divider"></li>
+                {% endif %}
+            {% endif %}
+            <li><a class="dropdown-item" href="https://cathyassenheim.com/"><i class="fa-solid fa-rotate-left"></i> Retour sur cathyassenheim.com</a></li>
+            <li><a class="dropdown-item" href="{{ logout }}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a></li>
+            <li>
+                <a class="dropdown-item" href="{{ path('app_account') }}">
+                    <span class="text-danger"><i class="fa-regular fa-trash-can"></i> Supprimer son compte</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+{% else %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_patient_register') }}"> S'inscrire</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ login }}"> Se connecter</a>
+    </li>
+{% endif %}

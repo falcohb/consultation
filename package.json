@@ -1,0 +1,42 @@
+{
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@symfony/webpack-encore": "^4.0.0",
+        "core-js": "^3.23.0",
+        "eslint": "^8.49.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-import-resolver-webpack": "^0.13.7",
+        "eslint-plugin-import": "^2.28.1",
+        "eslint-webpack-plugin": "^4.0.1",
+        "file-loader": "^6.0.0",
+        "postcss-loader": "^7.0.0",
+        "regenerator-runtime": "^0.13.9",
+        "sass": "^1.67.0",
+        "sass-loader": "^13.0.0",
+        "stylelint": "^15.10.3",
+        "stylelint-config-prettier-scss": "^1.0.0",
+        "stylelint-config-standard-scss": "^11.0.0",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-notifier": "^1.15.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.4.2",
+        "animate.css": "^4.1.1",
+        "bootstrap": "^5.3.2",
+        "bootstrap-icons": "^1.11.1",
+        "bootstrap-table": "^1.22.1",
+        "jquery": "^3.7.1",
+        "tableexport.jquery.plugin": "^1.28.0"
+    }
+}

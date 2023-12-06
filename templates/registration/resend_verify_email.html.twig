@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verify Email{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="callout callout-danger">
+                <h5><i class="fa-solid fa-triangle-exclamation"></i> Votre adresse mail n'a pas encore été vérifiée!</h5>
+                <p>
+                    Pour accéder à votre compte, veuillez confirmer votre adresse e-mail en cliquant sur le lien que
+                    nous vous avons envoyé par courrier électronique. Si vous n'avez pas reçu ce message, vous avez la
+                    possibilité de demander son renvoi.
+                </p>
+            </div>
+
+            <div class="callout callout-info">
+                <p>
+                    <i class="fa-solid fa-circle-info text-info"></i>
+                    Veuillez noter que des problèmes peuvent survenir avec les comptes de messagerie
+                    <strong>Hotmail </strong>ou <strong>Outlook</strong>.
+                    Ces deux services sont souvent enclins à bloquer certaines adresses IP. Si vous n'avez pas reçu
+                    l'e-mail de confirmation et que vous utilisez l'un de ces deux services, veuillez envisager de vous
+                    inscrire à nouveau en utilisant une autre adresse e-mail. Merci.
+                </p>
+            </div>
+
+            <div class="mt-4">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="resend_email" class="form-label">Votre adresse mail</label>
+                        <input type="email" class="form-control" id="resend_email" name="resend_email">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary mb-3">Renvoyez-moi un email de confirmation
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

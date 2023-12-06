@@ -1,0 +1,22 @@
+{# Left side #}
+<ul class="navbar-nav me-auto mb-md-0 mt-2">
+    {# Main Menu #}
+    <li class="nav-item"><a class="nav-link" href="https://annuaire.cathyassenheim.com" target="_blank">Annuaire pro</a></li>
+    <li class="nav-item"><a class="nav-link" href="https://www.cathyassenheim.com" target="_blank">Visitez cathyassenheim.com</a></li>
+</ul>
+
+{# Right side #}
+<ul class="d-flex navbar-nav mt-2">
+    {# User Menu #}
+    {{ component('user-menu', {
+        loginRoute: 'app_login',
+        logoutRoute: 'app_logout',
+        actions: [
+            {
+                icon: 'screwdriver-wrench',
+                label: 'app.menu.admin'|trans,
+                url: path('admin')
+            }
+        ]
+    }) }}
+</ul>

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+        <h1 class="display-6 fw-bold text-body-emphasis">Se connecter</h1>
+    </div>
+
+    <div class="row justify-content-start g-5">
+        <div class="col-md-5">
+            <div class="callout callout-primary">
+                <p>Vous devez disposer d'un compte pour pouvoir faire les tests. Si vous n'en avez pas, vous pouvez
+                    <a href="{{ path('app_register') }}">en créer un ici</a>.</p>
+                <p>Si vous rencontrez des problèmes techniques, <a href="mailto:support@cathyassenheim.com">contactez
+                        notre service support</a>.</p>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword">Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <button class="btn btn-outline-primary mb-3" type="submit">Connexion</button>
+                    </form>
+
+                    <div class="card-footer">
+                        <a href="{{ path('app_register') }}" class="card-link link-underline-light link-opacity-50-hover">Créer un compte</a>
+                        <a href="{{ path('app_forgot_password_request') }}" class="card-link link-underline-light link-opacity-50-hover">Mot de passe oublié?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

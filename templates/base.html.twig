@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" class="h-100">
+<head>
+    {% block meta_tags %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="theme-color" content="#ffffff">
+    <title>{% block title %}{% endblock %} | Cathy Assenheim</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('build/images/favicon/favicon.ico')}}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{  asset('build/images/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('build/images/favicon/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('build/images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('build/images/favicon/android-chrome-192x192.png') }}">
+    <link rel="manifest" href="{{ asset('build/images/favicon/site.webmanifest') }}">
+    {% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+
+<body class="d-flex flex-column h-100">
+{% block header %}
+    {{ include('layout/_header.html.twig') }}
+{% endblock %}
+
+{% block hero %}{% endblock %}
+
+{% block main %}
+<main class="flex-shrink-0 mb-3">
+    <div class="container">
+
+        <div class="mb-4">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('info') %}
+                <div class="alert alert-info">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% block body %}
+        {% endblock %}
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}
+    {{ include('layout/_footer.html.twig') }}
+{% endblock %}
+</body>
+</html>

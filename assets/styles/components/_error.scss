@@ -1,0 +1,73 @@
+@import "../variables";
+
+.notfound {
+  text-transform: uppercase;
+  max-width: 920px;
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 150px;
+
+  #notfound {
+    position: relative;
+    height: 100vh;
+
+    .notfound {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%)
+    }
+  }
+
+  h2 {
+    font-size: 46px;
+    color: $primary;
+    font-weight: 900;
+    margin: 0
+  }
+
+  p {
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+    margin-top: 15px
+  }
+
+  .code-error {
+    position: absolute;
+    height: 100px;
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+
+    h1 {
+      color: #ececec;
+      font-weight: 900;
+      font-size: 276px;
+      margin: 0;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%)
+    }
+  }
+
+  img.logo {
+    display: block;
+    margin: 8rem auto 0;
+  }
+}
+
+@media (320px <= width <= 480px) {
+  .notfound .notfound-404 h1 {
+    font-size: 162px;
+  }
+
+  .notfound h2 {
+    font-size: 26px;
+  }
+}

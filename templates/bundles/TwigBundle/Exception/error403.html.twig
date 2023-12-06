@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur 403{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-xl-8">
+            <div id="notfound">
+                <div class="notfound">
+                    <div class="code-error">
+                        <h1 class="animate__animated animate__hinge">403</h1>
+                    </div>
+                    <h2>Accès refusé!</h2>
+                    <p>
+                        Vous n'avez pas l'autorisation d'accéder à cette ressource.
+                        Si vous pensez qu'il s'agit d'une erreur, veuillez contacter
+                        <a href="mailto:support@cathyassenheim.com">notre support technique</a> pour obtenir de l'aide.
+                    </p>
+                    <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à la page d'accueil</a>
+                    <img class ="logo" src="{{ asset('build/images/logo_black.png') }}" alt="logo">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

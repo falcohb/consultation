@@ -1,0 +1,23 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap";
+
+// Custom variables
+@import "variables";
+
+// Now bring in bootstrap!
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "bootstrap-icons/font/bootstrap-icons.min.css";
+
+// Add our components
+@import "components/basics";
+@import "components/callout";
+@import "components/error";
+@import "components/form";
+@import "components/nav";
+
+// Add other css
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~animate.css/animate.min.css";
+@import "bootstrap-table/dist/bootstrap-table.min.css";
+
