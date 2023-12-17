@@ -47,7 +47,15 @@
         </include>
         <exclude>
             <file>src/Kernel.php</file>
+            <directory>src/Command/</directory>
             <directory>src/DataFixtures/</directory>
+            <directory>src/Factory/</directory>
+            <directory>src/Story/</directory>
+            <file>src/EventSubscriber/CheckVerifiedUserSubscriber.php</file>
+            <file>src/Security/AccountNotVerifiedAuthentication.php</file>
+            <file>src/Security/EmailVerifier.php</file>
+            <file>src/Repository/ResetPasswordRequestRepository.php</file>
+            <file>src/Controller/ResetPasswordController.php</file>
         </exclude>
         <report>
             <html outputDirectory="public/coverage" lowUpperBound="35" highLowerBound="60"/>

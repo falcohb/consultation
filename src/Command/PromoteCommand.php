@@ -25,6 +25,10 @@ use Symfony\Component\Stopwatch\Stopwatch;
 )]
 class PromoteCommand extends Command
 {
+    /**
+     * @var string
+     */
+    protected static $defaultName = 'app:user:promote';
     private UserRepository $userRepository;
     private Validator $validator;
     private SymfonyStyle $io;

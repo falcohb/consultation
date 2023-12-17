@@ -41,7 +41,7 @@ class PatientCrudController extends AbstractCrudController
                 return $patient->getDisplayName();
             })
             ->setEntityPermission('ROLE_ADMIN')
-            ->showEntityActionsInlined()
+            // ->showEntityActionsInlined()
         ;
     }
 
@@ -75,12 +75,13 @@ class PatientCrudController extends AbstractCrudController
             ->setFormat('long', 'short');
         $createdAt = DateTimeField::new('createdAt', 'Inscrit le')
             ->setFormat('long', 'short');
-        $isActive = BooleanField::new('isActive', 'Est actif?')->hideOnIndex();
-        $isVerified = BooleanField::new('isVerified', 'Email vérifié?');
+        $isActive = BooleanField::new('isActive', 'Est actif?');
+        $isVerified = BooleanField::new('isVerified', 'Email vérifié?')
+            ->renderAsSwitch(false);
         $origin = TextField::new('origin', 'Connu par');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $displayName, $email, $locality, $createdAt, $isVerified, $lastLoginAt ];
+            return [$id, $displayName, $email, $locality, $createdAt, $isVerified, $isActive, $lastLoginAt ];
         }
 
         return [
