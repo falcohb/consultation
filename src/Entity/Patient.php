@@ -5,18 +5,28 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PatientRepository::class)]
+#[ORM\Table(options: ['comment' => 'List of patients'])]
 class Patient extends User
 {
     public const ICON = 'fa-solid fa-users';
     public const COLOR = 'info';
     #[ORM\Column(length: 64, nullable: true)]
+    #[Assert\NotBlank]
     private ?string $locality = null;
 
     #[ORM\Column(length: 64, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'Le code postal ne peux pas contenir de lettre.',
+    )]
     private ?string $postal = null;
 
     #[ORM\Column(length: 64, nullable: true)]
@@ -26,6 +36,7 @@ class Patient extends User
     private ?string $phone = null;
 
     #[ORM\Column(length: 64)]
+    #[Assert\NotBlank]
     private string $origin;
 
     #[ORM\Column(nullable: true)]
@@ -33,6 +44,15 @@ class Patient extends User
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $birthdate = null;
+
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Appointment::class)]
+    private Collection $appointments;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->appointments = new ArrayCollection();
+    }
 
     public function getLocality(): ?string
     {
@@ -114,6 +134,36 @@ class Patient extends User
     public function setBirthdate(?\DateTimeInterface $birthdate): static
     {
         $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Appointment>
+     */
+    public function getAppointments(): Collection
+    {
+        return $this->appointments;
+    }
+
+    public function addAppointment(Appointment $appointment): static
+    {
+        if (!$this->appointments->contains($appointment)) {
+            $this->appointments->add($appointment);
+            $appointment->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAppointment(Appointment $appointment): static
+    {
+        if ($this->appointments->removeElement($appointment)) {
+            // set the owning side to null (unless already changed)
+            if ($appointment->getPatient() === $this) {
+                $appointment->setPatient(null);
+            }
+        }
 
         return $this;
     }

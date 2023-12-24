@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Patient;
+use App\Entity\Schedule;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -73,8 +74,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-gear');
-        yield MenuItem::linkToCrud('Administrateurs', User::ICON, User::class);
+        yield MenuItem::section('Rendez-vous');
+        yield MenuItem::linkToCrud('Date & horaire', Schedule::ICON, Schedule::class);
+        yield MenuItem::section('Utilisateurs');
         yield MenuItem::linkToCrud('Patients', Patient::ICON, Patient::class);
+        yield MenuItem::linkToCrud('Administrateurs', User::ICON, User::class);
         yield MenuItem::section();
         yield MenuItem::linkToUrl('Retour sur le site', 'fas fa-reply', $this->generateUrl('app_home'));
     }

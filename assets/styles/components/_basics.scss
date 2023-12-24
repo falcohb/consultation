@@ -14,3 +14,10 @@ main > .container {
   margin-bottom: 1rem !important;
   border-bottom: 1px solid lightgrey !important;
 }
+
+label.form-label.required {
+  &::after {
+    color: $danger;
+    content: " *";
+  }
+}

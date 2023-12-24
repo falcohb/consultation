@@ -1,6 +1,6 @@
 parameters:
     locale: 'fr'
-    app_locales: ['%locale%', 'en']
+    app_locales: ['%locale%']
     doctrine_behaviors_blameable_user_entity: 'App\Entity\User'
     mollie_api_key: '%env(MOLLIE_API_KEY)%'
 
@@ -15,3 +15,6 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    App\EventSubscriber\AppointmentSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }

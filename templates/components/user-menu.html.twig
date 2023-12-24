@@ -22,7 +22,8 @@
                     <li><hr class="dropdown-divider"></li>
                 {% endif %}
             {% endif %}
-            <li><a class="dropdown-item" href="https://cathyassenheim.com/"><i class="fa-solid fa-rotate-left"></i> Retour sur cathyassenheim.com</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_appointment_show', {'id': app.user.id }) }}"><i class="fa-solid fa-calendar"></i> Mes rendez-vous</a></li>
+            <li><a class="dropdown-item" href="https://cathyassenheim.com/"><i class="fa-solid fa-rotate-left"></i> Visitez cathyassenheim.com</a></li>
             <li><a class="dropdown-item" href="{{ logout }}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a></li>
             <li>
                 <a class="dropdown-item" href="{{ path('app_account') }}">

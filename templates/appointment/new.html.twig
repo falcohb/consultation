@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Appointment{% endblock %}
+
+{% block body %}
+    <h1 class="display-6 fw-bold text-body-emphasis mb-4">Sélectionnez un rendez-vous</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ include('appointment/_form.html.twig') }}
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+{% endblock %}

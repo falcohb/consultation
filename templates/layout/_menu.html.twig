@@ -1,6 +1,11 @@
 {# Left side #}
 <ul class="navbar-nav me-auto mb-md-0 mt-2">
     {# Main Menu #}
+    {% if is_granted('ROLE_USER') %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{  path('app_appointment_show', {'id': app.user.id }) }}">Mes rendez-vous</a>
+        </li>
+    {% endif %}
     <li class="nav-item"><a class="nav-link" href="https://annuaire.cathyassenheim.com" target="_blank">Annuaire pro</a></li>
     <li class="nav-item"><a class="nav-link" href="https://www.cathyassenheim.com" target="_blank">Visitez cathyassenheim.com</a></li>
 </ul>

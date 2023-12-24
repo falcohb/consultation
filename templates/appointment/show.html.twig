@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes rendez-vous{% endblock %}
+
+{% block body %}
+    <h1 class="display-6 fw-bold text-body-emphasis mb-5">Mes rendez-vous</h1>
+
+    <div class="row my-5 justify-content-center text-center">
+        <div class="col-xl-10">
+            <h5 class="mb-3"><i class="fa-regular fa-clock"></i> Mon prochain rendez-vous</h5>
+            <p>
+                Votre prochain rendez-vous est fixé au <strong>{{ appointment.schedule.date|format_datetime('full', 'short', locale='fr')}}</strong>.<br>
+                {{ appointment.isAdult ? 'Il s\'agit d\'un rendez-vous adulte' : 'Il s\'agit d\'un rendez-vous pour un enfant' }}
+                {{ appointment.schedule.isVirtual ? ' en ligne.' : ' en présentiel qui se déroulera à mon cabinet de Ohain (Lasne) Clé des Champs 4' }}
+            </p>
+
+            <div class="mb-3">
+                <a class="btn btn-sm btn-info" href="{{ path('app_appointment_icalendar', {'id': app.user.id}) }}">
+                    <i class="fa-regular fa-calendar-plus"></i> Télécharger le fichier iCal
+                </a>
+            </div>
+
+            <button class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i> Modifier ce rendez-vous</button>
+            <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> Supprimer ce rendez-vous</button>
+
+        </div>
+    </div>
+
+    <div class="row my-5 justify-content-center text-center">
+        <div class="col-xl-8">
+            <h5 class="mb-3"><i class="fa-solid fa-clock-rotate-left"></i> Mes précédents rendez-vous</h5>
+            <table class="table table-striped">
+                <tbody>
+                {% for appointment in pastAppointments %}
+                    <tr>
+                        <td>{{ appointment.schedule.date|format_datetime('full', 'short', locale='fr')|capitalize }}</td>
+                        <td>{{ appointment.isAdult ? 'Consultation enfant' : 'Consultation adulte' }} </td>
+                        <td>{{ appointment.schedule.isVirtual ? 'En ligne' : 'En présentiel' }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row my-4 justify-content-center text-center">
+        <div class="col-xl-6">
+            <h5 class="mb-3"><i class="fa-solid fa-user"></i> Mon profil</h5>
+
+            <div class="mb-3">
+                <div class="fw-bold">{{ app.user.firstName }} {{ app.user.lastName}}</div>
+                <div>{{ app.user.email }}</div>
+                <div>{{ app.user.phone }}</div>
+                <div>{{ app.user.postal }} {{ app.user.locality }}</div>
+            </div>
+
+            <button class="btn btn-sm btn-success"><i class="fa-solid fa-user-pen"></i> Modifier mon profil</button>
+            <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> Supprimer mon compte</button>
+        </div>
+    </div>
+
+{% endblock %}

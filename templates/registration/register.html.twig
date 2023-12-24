@@ -1,19 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer un compte{% endblock %}
+{% block title %}Créer un compte admin{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1 class="display-6 fw-bold text-body-emphasis">Créer un compte</h1>
+    <h1 class="display-6 fw-bold text-body-emphasis">Créer un compte admin</h1>
 
     <div class="row justify-content-start g-5">
         <div class="col-md-5">
             <div class="callout callout-primary">
-                <p>La préservation de la confidentialité de vos données revêt une importance capitale pour nous. Nous
-                    garantissons que vos informations ne seront en aucun cas partagées avec des tiers.</p>
                 <p>Lorsque vous vous inscrivez sur notre site, vous consentez à recevoir des informations sur
                    les divers services proposés par Cathy Assenheim.</p>
             </div>

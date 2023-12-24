@@ -10,8 +10,8 @@
     <div class="row justify-content-start g-5">
         <div class="col-md-5">
             <div class="callout callout-primary">
-                <p>Vous devez disposer d'un compte pour pouvoir faire les tests. Si vous n'en avez pas, vous pouvez
-                    <a href="{{ path('app_register') }}">en créer un ici</a>.</p>
+                <p>Vous devez disposer d'un compte pour pouvoir prendre rendez-vous. Si vous n'en avez pas, vous pouvez
+                    <a href="{{ path('app_patient_register') }}">en créer un ici</a>.</p>
                 <p>Si vous rencontrez des problèmes techniques, <a href="mailto:support@cathyassenheim.com">contactez
                         notre service support</a>.</p>
             </div>
@@ -24,7 +24,7 @@
 
             {% if app.user %}
                 <div class="mb-3">
-                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
 
@@ -44,7 +44,7 @@
                     </form>
 
                     <div class="card-footer">
-                        <a href="{{ path('app_register') }}" class="card-link link-underline-light link-opacity-50-hover">Créer un compte</a>
+                        <a href="{{ path('app_patient_register') }}" class="card-link link-underline-light link-opacity-50-hover">Créer un compte</a>
                         <a href="{{ path('app_forgot_password_request') }}" class="card-link link-underline-light link-opacity-50-hover">Mot de passe oublié?</a>
                     </div>
                 </div>

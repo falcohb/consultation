@@ -7,17 +7,31 @@
         <div class="col-lg-6 col-sm-12">
             <div class="align-middle">
                 <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Prenez rendez-vous en ligne!</h1>
-                <p class="lead">Powder gummies croissant sweet roll powder carrot cake lemon drops chupa chups. Jelly
-                    beans tootsie roll wafer halvah topping shortbread pastry candy tiramisu. Fruitcake shortbread apple
-                    pie candy apple pie jelly-o dessert. Croissant carrot cake jelly fruitcake chocolate bar cookie
-                    gummi bears jelly-o sugar plum. Carrot cake topping tart powder chocolate bar soufflé bonbon. Wafer
-                    soufflé powder pastry toffee wafer. Cupcake candy canes powder icing sweet pie. Pudding liquorice
-                    macaroon muffin bear claw cotton candy macaroon lollipop danish</p>
+                <p class="lead">En raison d'une activité très chargée, j'ai réduit le nombre de rendez-vous disponibles.
+                    Dans le but de maintenir la continuité de la prise en charge, les anciens patients ont la priorité
+                    lors de la prise de rendez-vous. Cela signifie que les nouveaux rendez-vous peuvent avoir des
+                    temps d'attente assez longs. Merci pour votre compréhension et votre patience.</p>
             </div>
 
-            <div class="mt-3">
-                <a href="" class="btn btn-lg btn-success">Prendre un rendez-vous</a>
-            </div>
+            {% if firstDate is not null %}
+                <div class="alert alert-info text-center" role="alert">
+                    <strong>Prochain rendez-vous disponible</strong><br>
+                    {{ firstDate|format_datetime('full', 'short', locale='fr')|capitalize }}
+                </div>
+                <div class="mt-3 text-center">
+                    <a href="{{ path('app_appointment_new') }}" class="btn btn-success">Prendre un rendez-vous</a>
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('app_appointment_show', {'id': app.user.id}) }}" class="btn btn-info">Consulter mes rendez-vous</a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="alert alert-danger text-center" role="alert">
+                    L'agenda des consultations est malheureusement complet.<br>
+                    Merci de revenir consulter ce site un peu plus tard.
+                </div>
+            {% endif %}
+
+
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1 class="display-6 fw-bold text-body-emphasis">Créer un compte</h1>
+    <h1 class="display-6 fw-bold text-body-emphasis mb-5">Créer un compte</h1>
 
     <div class="row">
         <div class="col-md-8 mb-5">
@@ -19,8 +19,8 @@
                     {{ form_row(registrationForm.firstName) }}
                     {{ form_row(registrationForm.lastName) }}
                     {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.origin) }}
                     {{ form_row(registrationForm.plainPassword) }}
+                    {{ form_row(registrationForm.origin) }}
                 </div>
 
                 <div class="col-md-6">
@@ -31,17 +31,25 @@
                     {{ form_row(registrationForm.doctor) }}
                 </div>
             </div>
-            <button type="submit" class="btn btn-purple">S'enregistrer</button>
-            <a href="{{ path('app_home') }}" class="btn btn-secondary">Annuler</a>
+            <div class="form-text mb-0 help-text">* Champs obligatoires</div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-outline-primary" formnovalidate>S'enregistrer</button>
+                <a href="{{ path('app_home') }}" class="btn btn-outline-dark">Annuler</a>
+            </div>
 
             {{ form_end(registrationForm) }}
         </div>
 
         <div class="col-md-4">
-            <div class="tag-box tag-box-purple-v2">
-                <p class="mb-2">J'accorde une grande importance à la protection de vos données c'est pourquoi elles ne seront <strong>jamais transmises à des tiers</strong>.</p>
-                <p class="mb-2">Nous avons pris des mesures techniques et organisationnelles de sécurité pour protéger vos informations personnelles contre les pertes, la destruction, la manipulation et l’accès non autorisé.</p>
-                <p class="mb-2">Ce site n'utilise pas de cookies qui conserveraient vos données personnelles.</p>
+            <div class="callout callout-primary">
+                <p>
+                    La préservation de la confidentialité de vos données est une priorité majeure pour moi, et c'est
+                    pourquoi je m'engage à ne jamais les partager avec des tiers.
+                    Des mesures de sécurité techniques et organisationnelles ont été mises en place pour protéger vos
+                    informations personnelles contre toute perte, destruction, manipulation ou accès non autorisé.</p>
+                <p>Ce site n'utilise aucun cookie qui stockerait vos données personnelles.
+                    Votre vie privée est importante, et je prends toutes les précautions nécessaires pour assurer la
+                    sécurité de vos informations.</p>
             </div>
         </div>
     </div>
