@@ -1,0 +1,20 @@
+<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous certain.e de vouloir supprimer ce rendez-vous?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Non</button>
+                <form method="post" action="{{ path('app_appointment_delete', {'id': appointment.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ appointment.id) }}">
+                    <button class="btn btn-outline-primary"> Oui</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

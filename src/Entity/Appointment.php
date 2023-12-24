@@ -21,7 +21,7 @@ class Appointment
     #[ORM\JoinColumn(nullable: false)]
     private ?Patient $patient = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private ?Schedule $schedule = null;

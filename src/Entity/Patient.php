@@ -45,7 +45,7 @@ class Patient extends User
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $birthdate = null;
 
-    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Appointment::class)]
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Appointment::class, cascade: ['remove'])]
     private Collection $appointments;
 
     public function __construct()

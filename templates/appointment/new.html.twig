@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Appointment{% endblock %}
+{% block title %}Sélectionnez un rendez-vous{% endblock %}
 
 {% block body %}
     <h1 class="display-6 fw-bold text-body-emphasis mb-4">Sélectionnez un rendez-vous</h1>
@@ -10,7 +10,24 @@
             {{ include('appointment/_form.html.twig') }}
         </div>
         <div class="col-md-6">
-
+            <div class="callout callout-sm callout-danger mt-0">
+                Vous ne pouvez prendre qu'un rendez-vous à la fois.
+            </div>
+            <div class="callout callout-sm callout-primary">
+                <ul>
+                    <li>La séance dure environ 45 minutes (1h pour la première consultation) mais un entraînement
+                        personnel
+                        régulier est nécessaire à l'intégration et à l'efficacité de ma méthode.
+                    </li>
+                    <li>Mes honoraires sont de 80€.</li>
+                    <li>Vous recevez en fin de consultation une attestation fiscale pour remboursement partiel de la
+                        mutuelle (15 à 25 euros selon votre mutuelle).
+                    </li>
+                    <li>En général, il faut compter 3 à 5 séances par objectif avant de sentir un réel changement. Mais
+                        dès la première séance, vous sentirez déjà des effets positifs sur votre bien-être!
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 {% endblock %}

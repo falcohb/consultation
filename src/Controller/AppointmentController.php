@@ -13,9 +13,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/rendezvous')]
+#[IsGranted('ROLE_USER')]
 class AppointmentController extends AbstractController
 {
     public function __construct(
@@ -74,17 +77,35 @@ class AppointmentController extends AbstractController
     #[Route('/{id}', name: 'app_appointment_delete', methods: ['POST'])]
     public function delete(Request $request, Appointment $appointment, EntityManagerInterface $entityManager): Response
     {
+        $patient = $appointment->getPatient();
+
+        if (!$patient) {
+            throw new NotFoundHttpException('Patient not found.');
+        }
+
         if (
             $this->isCsrfTokenValid(
                 'delete' . $appointment->getId(),
                 (string) $request->request->get('_token')
             )
         ) {
+            // Resets the appointment to available
+            $schedule = $appointment->getSchedule();
+
+            // Check whether the appointment has a valid timetable
+            if ($schedule) {
+                $schedule->setIsAvailable(true);
+                $entityManager->persist($schedule);
+            } else {
+                throw new NotFoundHttpException('Appointment not found');
+            }
+
+            // Delete appointment
             $entityManager->remove($appointment);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_appointment_new', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_appointment_show', ['id' => $patient->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/icalendar', name: 'app_appointment_icalendar', methods: ['GET'])]
