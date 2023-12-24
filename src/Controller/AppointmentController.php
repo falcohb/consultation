@@ -74,7 +74,12 @@ class AppointmentController extends AbstractController
     #[Route('/{id}', name: 'app_appointment_delete', methods: ['POST'])]
     public function delete(Request $request, Appointment $appointment, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $appointment->getId(), (string) $request->request->get('_token'))) {
+        if (
+            $this->isCsrfTokenValid(
+                'delete' . $appointment->getId(),
+                (string) $request->request->get('_token')
+            )
+        ) {
             $entityManager->remove($appointment);
             $entityManager->flush();
         }
@@ -115,7 +120,7 @@ class AppointmentController extends AbstractController
             $icsContent = $this->calendarService->generateICalendarLink(
                 $eventName,
                 $eventDescription,
-                $startDate !== null ? $startDate : new \DateTime(), // Utilisation de la date actuelle si $startDate est null
+                $startDate !== null ? $startDate : new \DateTime(),
                 $endDate !== null ? $endDate : new \DateTime(),
                 $location,
                 'https://consultations.cathyassenheim.com'
