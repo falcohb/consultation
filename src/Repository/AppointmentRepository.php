@@ -45,7 +45,7 @@ class AppointmentRepository extends ServiceEntityRepository
     /**
      * @return array<Appointment> Returns an array of Schedule objects
      */
-    public function getPastAppointmentByPatient(int $patientId): array
+    public function getPastAppointmentsByPatient(int $patientId): array
     {
         $date = new \DateTime();
 

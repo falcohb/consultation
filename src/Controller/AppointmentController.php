@@ -34,7 +34,9 @@ class AppointmentController extends AbstractController
 
         if ($patientId !== null) {
             $appointment = $this->appointmentRepository->getUpcomingAppointmentByPatient($patientId);
-            $pastAppointments = $this->appointmentRepository->getPastAppointmentByPatient($patientId);
+            $pastAppointments = $this->appointmentRepository->getPastAppointmentsByPatient($patientId);
+
+            $this->denyAccessUnlessGranted('VIEW_APPOINTMENT', $appointment);
 
             return $this->render('appointment/show.html.twig', [
                 'appointment' => $appointment,
