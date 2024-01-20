@@ -18,11 +18,11 @@ class Patient extends User
     public const ICON = 'fa-solid fa-users';
     public const COLOR = 'info';
     #[ORM\Column(length: 64, nullable: true)]
-    #[Assert\NotBlank(message: 'Veuillez saisir une localité.')]
+    #[Assert\NotBlank(message: 'Veuillez saisir votre localité.')]
     private ?string $locality = null;
 
     #[ORM\Column(length: 64, nullable: true)]
-    #[Assert\NotBlank(message: 'Veuillez saisir un code postal.')]
+    #[Assert\NotBlank(message: 'Veuillez saisir votre code postal.')]
     #[Assert\Type(
         type: 'integer',
         message: 'Le code postal ne peux pas contenir de lettre.',
