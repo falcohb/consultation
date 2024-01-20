@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true, options: ['comment' => 'Email of the user'])]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez saisir une adresse email.')]
     #[Assert\Email]
     private string $email;
 
@@ -49,11 +49,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $plainPassword = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez saisir un prénom.')]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez saisir un nom.')]
     private ?string $lastName = null;
 
     #[ORM\Column(type: 'boolean')]

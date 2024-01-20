@@ -18,11 +18,11 @@ class Patient extends User
     public const ICON = 'fa-solid fa-users';
     public const COLOR = 'info';
     #[ORM\Column(length: 64, nullable: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez saisir une localité.')]
     private ?string $locality = null;
 
     #[ORM\Column(length: 64, nullable: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez saisir un code postal.')]
     #[Assert\Type(
         type: 'integer',
         message: 'Le code postal ne peux pas contenir de lettre.',
@@ -36,13 +36,22 @@ class Patient extends User
     private ?string $phone = null;
 
     #[ORM\Column(length: 64)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez saisir une réponse.')]
     private string $origin;
 
     #[ORM\Column(nullable: true)]
     private ?bool $isActive = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\NotBlank(message: 'Veuillez saisir votre date de naissance.')]
+    #[Assert\LessThan(
+        value: 'today',
+        message: 'La date de naissance ne peux pas être dans le futur.',
+    )]
+    #[Assert\LessThan(
+        value: '-18 years',
+        message: 'Vous devez avoir au moins 18 ans pour vous inscrire.',
+    )]
     private ?\DateTimeInterface $birthdate = null;
 
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Appointment::class, cascade: ['remove'])]

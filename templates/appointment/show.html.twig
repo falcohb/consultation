@@ -6,43 +6,48 @@
     <h1 class="display-6 fw-bold text-body-emphasis mb-5">Mes rendez-vous</h1>
 
     <div class="row my-5 justify-content-center text-center">
-        <div class="col-xl-10">
-            <h5 class="mb-3"><i class="fa-regular fa-clock"></i> Mon prochain rendez-vous</h5>
-
-            {% if appointment.schedule is defined %}
-                <p>
-                    Votre prochain rendez-vous est fixé au <strong>{{ appointment.schedule.date|format_datetime('full', 'short', locale='fr')}}</strong>.<br>
-                    {{ appointment.isAdult ? 'Il s\'agit d\'un rendez-vous <strong>adulte</strong>' : 'Il s\'agit d\'un rendez-vous pour un <strong>enfant</strong>' }}
-                    {% if appointment.isVirtual %}
-                        <strong>en ligne</strong>.
-                    {% else %}
-                        <strong>en présentiel</strong> qui se déroulera à mon cabinet<br>Clé des Champs 4 - 1380 Lasne (<a
-                            href="https://maps.app.goo.gl/rQBKTbe2J3aQ5JDw5" target="_blank">Google Map</a>).
-                    {% endif %}
-                </p>
-
-                <div class="mb-3">
-                    <a class="btn btn-info" href="{{ path('app_appointment_icalendar') }}">
-                        <i class="fa-regular fa-calendar-plus"></i> Télécharger le fichier iCal
-                    </a>
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0"><i class="fa-regular fa-clock"></i> Mon prochain rendez-vous</h5>
                 </div>
+                <div class="card-body">
+                    {% if appointment.schedule is defined %}
+                        <p class="card-text">
+                            Votre prochain rendez-vous est fixé au <strong>{{ appointment.schedule.date|format_datetime('full', 'short', locale='fr')}}</strong>.<br>
+                            {{ appointment.isAdult ? 'Il s\'agit d\'un rendez-vous <strong>adulte</strong>' : 'Il s\'agit d\'un rendez-vous pour un <strong>enfant</strong>' }}
+                            {% if appointment.isVirtual %}
+                                <strong>en ligne</strong>.
+                            {% else %}
+                                <strong>en présentiel</strong> qui se déroulera à mon cabinet<br>Clé des Champs 4 - 1380 Lasne (<a
+                                    href="https://maps.app.goo.gl/rQBKTbe2J3aQ5JDw5" target="_blank">Google Map</a>).
+                            {% endif %}
+                        </p>
 
-                <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Modifier ce rendez-vous</button>
-                <a class="btn btn-danger" href="#"
-                   data-bs-toggle="modal" data-bs-target="#deleteAppointmentModal">
-                    <i class="fa fa-trash-can"></i> Supprimer ce rendez-vous
-                </a>
-                {{  include('modal/modal_delete_appointment.html.twig') }}
+                        <div class="mb-3">
+                            <a class="btn btn-info" href="{{ path('app_appointment_icalendar') }}">
+                                <i class="fa-regular fa-calendar-plus"></i> Télécharger le fichier iCal
+                            </a>
+                        </div>
 
-            {% else %}
-                <p>Vous n'avez pas de rendez-vous fixé pour l'instant.</p>
-                <a href="{{ path('app_appointment_new') }}" class="btn btn-primary">Prendre un nouveau rendez-vous</a>
-            {% endif %}
+                        <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Modifier ce rendez-vous</button>
+                        <a class="btn btn-danger" href="#"
+                           data-bs-toggle="modal" data-bs-target="#deleteAppointmentModal">
+                            <i class="fa fa-trash-can"></i> Supprimer ce rendez-vous
+                        </a>
+                        {{  include('modal/modal_delete_appointment.html.twig') }}
 
+                    {% else %}
+                        <p>Vous n'avez pas de rendez-vous fixé pour l'instant.</p>
+                        <a href="{{ path('app_appointment_new') }}" class="btn btn-primary">Prendre un nouveau rendez-vous</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 
     {% if pastAppointments|length > 0 %}
+
     <div class="row my-5 justify-content-center text-center">
         <div class="col-xl-8">
             <h5 class="mb-3"><i class="fa-solid fa-clock-rotate-left"></i> Mes précédents rendez-vous</h5>
@@ -52,7 +57,7 @@
                     <tr>
                         <td>{{ appointment.schedule.date|format_datetime('full', 'short', locale='fr')|capitalize }}</td>
                         <td>{{ appointment.isAdult ? 'Consultation enfant' : 'Consultation adulte' }} </td>
-                        <td>{{ appointment.schedule.isVirtual ? 'En ligne' : 'En présentiel' }} </td>
+                        <td>{{ appointment.isVirtual ? 'En ligne' : 'En présentiel' }} </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -62,18 +67,22 @@
     {% endif %}
 
     <div class="row my-4 justify-content-center text-center">
-        <div class="col-xl-6">
-            <h5 class="mb-3"><i class="fa-solid fa-user"></i> Mon profil</h5>
-
-            <div class="mb-3">
-                <div class="fw-bold">{{ app.user.firstName }} {{ app.user.lastName}}</div>
-                <div>{{ app.user.email }}</div>
-                <div>{{ app.user.phone }}</div>
-                <div>{{ app.user.postal }} {{ app.user.locality }}</div>
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0"><i class="fa-solid fa-user"></i> Mon profil</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="fw-bold">{{ app.user.firstName }} {{ app.user.lastName}}</div>
+                        <div>{{ app.user.email }}</div>
+                        <div>{{ app.user.phone }}</div>
+                        <div>{{ app.user.postal }} {{ app.user.locality }}</div>
+                    </div>
+                    <button class="btn btn-success"><i class="fa-solid fa-user-pen"></i> Modifier mon profil</button>
+                    <a href="{{ path('app_account') }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Supprimer mon compte</a>
+                </div>
             </div>
-
-            <button class="btn btn-success"><i class="fa-solid fa-user-pen"></i> Modifier mon profil</button>
-            <a href="{{ path('app_account') }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Supprimer mon compte</a>
         </div>
     </div>
 
