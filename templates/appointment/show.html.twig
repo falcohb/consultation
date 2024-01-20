@@ -12,12 +12,17 @@
             {% if appointment.schedule is defined %}
                 <p>
                     Votre prochain rendez-vous est fixé au <strong>{{ appointment.schedule.date|format_datetime('full', 'short', locale='fr')}}</strong>.<br>
-                    {{ appointment.isAdult ? 'Il s\'agit d\'un rendez-vous pour un enfant' : 'Il s\'agit d\'un rendez-vous adulte' }}
-                    {{ appointment.schedule.isVirtual ? ' en ligne.' : ' en présentiel qui se déroulera à mon cabinet de Ohain (Lasne) Clé des Champs 4' }}
+                    {{ appointment.isAdult ? 'Il s\'agit d\'un rendez-vous <strong>adulte</strong>' : 'Il s\'agit d\'un rendez-vous pour un <strong>enfant</strong>' }}
+                    {% if appointment.isVirtual %}
+                        <strong>en ligne</strong>.
+                    {% else %}
+                        <strong>en présentiel</strong> qui se déroulera à mon cabinet<br>Clé des Champs 4 - 1380 Lasne (<a
+                            href="https://maps.app.goo.gl/rQBKTbe2J3aQ5JDw5" target="_blank">Google Map</a>).
+                    {% endif %}
                 </p>
 
                 <div class="mb-3">
-                    <a class="btn btn-info" href="{{ path('app_appointment_icalendar', {'id': app.user.id}) }}">
+                    <a class="btn btn-info" href="{{ path('app_appointment_icalendar') }}">
                         <i class="fa-regular fa-calendar-plus"></i> Télécharger le fichier iCal
                     </a>
                 </div>

@@ -6,25 +6,46 @@
     <h1 class="display-6 fw-bold text-body-emphasis mb-4">Sélectionnez un rendez-vous</h1>
 
     <div class="row">
-        <div class="col-md-6">
-            {{ include('appointment/_form.html.twig') }}
-        </div>
-        <div class="col-md-6">
-            <div class="callout callout-sm callout-danger mt-0">
-                Vous ne pouvez prendre qu'un rendez-vous à la fois.
+        {% if hasAppointment %}
+            <div class="col-md-6">
+                <div class="callout callout-primary text-primary mt-0 mb-3">
+                    <div class="row">
+                        <div class="col-2">
+                            <h2><i class="fa-solid fa-triangle-exclamation fa-2xl"></i></h2>
+                        </div>
+                        <div class="col-10">
+                            <p>Vous avez déjà un rendez-vous planifié dans les jours à venir. Étant donné que nous
+                                restreignons la
+                                réservation à un seul rendez-vous à la fois, nous vous prions de patienter jusqu'à ce
+                                que ce
+                                rendez-vous ait eu lieu ou soit annulé avant d'en planifier un nouveau.</p>
+                            <p>Si vous souhaitez modifier ou annuler le rendez-vous actuellement programmé, veuillez
+                                cliquer sur le bouton ci-dessous.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ path('app_appointment_show') }}" class="btn btn-primary">Consulter mes rendez-vous</a>
             </div>
-            <div class="callout callout-sm callout-primary">
+        {% else %}
+            <div class="col-md-6">
+                {{ include('appointment/_form.html.twig') }}
+            </div>
+        {% endif %}
+
+        <div class="col-md-6">
+            <div class="callout callout-sm callout-info mt-0">
                 <ul>
-                    <li>La séance dure environ 45 minutes (1h pour la première consultation) mais un entraînement
-                        personnel
-                        régulier est nécessaire à l'intégration et à l'efficacité de ma méthode.
+                    <li>La séance dure environ 45 minutes mais un entraînement
+                        personnel régulier est nécessaire à l'intégration et à l'efficacité de ma méthode.
                     </li>
-                    <li>Mes honoraires sont de 80€.</li>
+                    <li>Mes honoraires sont de <strong>80€</strong>.</li>
                     <li>Vous recevez en fin de consultation une attestation fiscale pour remboursement partiel de la
                         mutuelle (15 à 25 euros selon votre mutuelle).
                     </li>
-                    <li>En général, il faut compter 3 à 5 séances par objectif avant de sentir un réel changement. Mais
-                        dès la première séance, vous sentirez déjà des effets positifs sur votre bien-être!
+                    <li>Pour les <strong>consultations à distance</strong>, aucune installation logicielle spécifique
+                        n'est requise. Vous devez simplement disposer d'une caméra et d'un microphone. Un e-mail vous
+                        sera envoyé, comprenant le lien à suivre pour participer à la consultation en ligne, ainsi qu'un
+                        QR code qui facilitera le règlement de la séance.
                     </li>
                 </ul>
             </div>

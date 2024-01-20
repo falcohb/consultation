@@ -9,7 +9,6 @@ use App\Entity\Schedule;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +31,15 @@ class AppointmentType extends AbstractType
                 'choices' => $this->getAvailableDates(),
                 'autocomplete' => true,
             ])
+            ->add('isVirtual', ChoiceType::class, [
+                'label' => false,
+                'placeholder' => 'Sélectionnez un type de rendez-vous',
+                'choices' => [
+                    'A distance (visioconférence)' => 1,
+                    'En présentiel' => 0,
+                ],
+                'autocomplete' => true,
+            ])
             ->add('subject', ChoiceType::class, [
                 'label' => false,
                 'placeholder' => 'Sélectionnez l\'objet de la consultation',
@@ -42,12 +50,17 @@ class AppointmentType extends AbstractType
                 ],
                 'autocomplete' => true,
             ])
-            ->add('isAdult', CheckboxType::class, [
-                'label' => 'Cochez cette case si vous prenez rendez-vous pour un enfant.',
-                'required' => false,
+            ->add('isAdult', ChoiceType::class, [
+                'label' => false,
+                'placeholder' => 'Pour qui prenez-vous rendez-vous?',
+                'choices' => [
+                    'Pour moi (adulte)' => 1,
+                    'Pour un enfant ou un adolescent' => 0,
+                ],
+                'autocomplete' => true,
             ])
             ->add('comment', TextareaType::class, [
-                'label' => 'Avez-vous des informations supplémentaires à me communiquer?',
+                'label' => 'Avez-vous des informations importantes à me communiquer sur votre état de santé?',
                 'attr' => [
                     'rows' => 5,
                 ],

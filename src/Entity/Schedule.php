@@ -27,9 +27,6 @@ class Schedule
     #[ORM\Column]
     private bool $isAvailable;
 
-    #[ORM\Column(options: ['comment' => 'Face-to-face or remote'])]
-    private bool $isVirtual;
-
     public function getFormattedDate(): string
     {
         $dateFormatter = IntlDateFormatter::create(
@@ -74,18 +71,6 @@ class Schedule
     public function setIsAvailable(bool $isAvailable): static
     {
         $this->isAvailable = $isAvailable;
-
-        return $this;
-    }
-
-    public function isIsVirtual(): ?bool
-    {
-        return $this->isVirtual;
-    }
-
-    public function setIsVirtual(bool $isVirtual): static
-    {
-        $this->isVirtual = $isVirtual;
 
         return $this;
     }

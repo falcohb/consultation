@@ -21,7 +21,7 @@
                 <div class="mt-3 text-center">
                     <a href="{{ path('app_appointment_new') }}" class="btn btn-success">Prendre un rendez-vous</a>
                     {% if is_granted('ROLE_USER') %}
-                        <a href="{{ path('app_appointment_show', {'id': app.user.id}) }}" class="btn btn-info">Consulter mes rendez-vous</a>
+                        <a href="{{ path('app_appointment_show')}}" class="btn btn-info">Consulter mes rendez-vous</a>
                     {% endif %}
                 </div>
             {% else %}
@@ -30,7 +30,6 @@
                     Merci de revenir consulter ce site un peu plus tard.
                 </div>
             {% endif %}
-
 
         </div>
     </div>

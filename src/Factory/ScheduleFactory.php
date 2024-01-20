@@ -39,7 +39,6 @@ final class ScheduleFactory extends ModelFactory
         return [
             'date' => self::faker()->dateTimeBetween('-2 weeks', '+2 months'),
             'isAvailable' => self::faker()->boolean(),
-            'isVirtual' => self::faker()->boolean(),
         ];
     }
 

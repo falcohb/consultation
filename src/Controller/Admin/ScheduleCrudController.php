@@ -46,7 +46,6 @@ class ScheduleCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             DateTimeField::new('date', 'Date'),
             BooleanField::new('isAvailable', 'Date disponible?'),
-            BooleanField::new('isVirtual', 'Présentiel?'),
         ];
     }
 }

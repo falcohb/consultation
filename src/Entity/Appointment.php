@@ -23,15 +23,20 @@ class Appointment
 
     #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez choisir une date!')]
     private ?Schedule $schedule = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Veuillez choisir un objet!')]
     private ?string $subject = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['comment' => 'Adult or child'])]
+    #[Assert\NotNull(message: 'Veuillez choisir une réponse!')]
     private bool $isAdult;
+
+    #[ORM\Column(options: ['comment' => 'Face-to-face or remote'])]
+    #[Assert\NotNull(message: 'Veuillez choisir le type de rendez-vous!')]
+    private bool $isVirtual;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
@@ -85,6 +90,18 @@ class Appointment
     public function setIsAdult(bool $isAdult): static
     {
         $this->isAdult = $isAdult;
+
+        return $this;
+    }
+
+    public function isVirtual(): bool
+    {
+        return $this->isVirtual;
+    }
+
+    public function setIsVirtual(bool $isVirtual): static
+    {
+        $this->isVirtual = $isVirtual;
 
         return $this;
     }

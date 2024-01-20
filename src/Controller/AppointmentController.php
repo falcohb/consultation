@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/rendezvous')]
@@ -27,16 +27,16 @@ class AppointmentController extends AbstractController
     ) {
     }
 
-    #[Route('/{id}', name: 'app_appointment_show', methods: ['GET'])]
-    public function show(Patient $patient): Response
+    #[Route('/detail', name: 'app_appointment_show', methods: ['GET'])]
+    public function show(): Response
     {
+        /** @var Patient $patient */
+        $patient = $this->getUser();
         $patientId = $patient->getId();
 
         if ($patientId !== null) {
             $appointment = $this->appointmentRepository->getUpcomingAppointmentByPatient($patientId);
             $pastAppointments = $this->appointmentRepository->getPastAppointmentsByPatient($patientId);
-
-            $this->denyAccessUnlessGranted('VIEW_APPOINTMENT', $appointment);
 
             return $this->render('appointment/show.html.twig', [
                 'appointment' => $appointment,
@@ -46,7 +46,7 @@ class AppointmentController extends AbstractController
         throw new \InvalidArgumentException('Patient cannot be null.');
     }
 
-    #[Route('/', name: 'app_appointment_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_appointment_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -72,11 +72,12 @@ class AppointmentController extends AbstractController
 
         return $this->render('appointment/new.html.twig', [
             'appointment' => $appointment,
+            'hasAppointment' => $this->checkIfPatientHasAppointment(),
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_appointment_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_appointment_delete', methods: ['POST'])]
     public function delete(Request $request, Appointment $appointment, EntityManagerInterface $entityManager): Response
     {
         $patient = $appointment->getPatient();
@@ -110,9 +111,11 @@ class AppointmentController extends AbstractController
         return $this->redirectToRoute('app_appointment_show', ['id' => $patient->getId()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/icalendar', name: 'app_appointment_icalendar', methods: ['GET'])]
-    public function getIcalendar(Patient $patient): Response
+    #[Route('/icalendar', name: 'app_appointment_icalendar', methods: ['GET'])]
+    public function getIcalendar(): Response
     {
+        /** @var Patient $patient */
+        $patient = $this->getUser();
         $patientId = $patient->getId();
 
         if ($patientId !== null) {
@@ -155,6 +158,24 @@ class AppointmentController extends AbstractController
 
             return $response;
         }
+        throw new \InvalidArgumentException('Patient cannot be null.');
+    }
+
+    private function checkIfPatientHasAppointment(): bool
+    {
+        /** @var Patient|null $patient */
+        $patient = $this->getUser();
+
+        if ($patient !== null) {
+            $patientId = $patient->getId();
+
+            if ($patientId !== null) {
+                $appointment = $this->appointmentRepository->getUpcomingAppointmentByPatient($patientId);
+                return (bool) $appointment;
+            }
+            throw new \InvalidArgumentException('Patient ID cannot be null.');
+        }
+
         throw new \InvalidArgumentException('Patient cannot be null.');
     }
 }
